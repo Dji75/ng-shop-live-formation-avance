@@ -1,1 +1,5 @@
 <p>products works!</p>
+
+@for (_ of products; track $index) {
+  <div highlightOnOverWhenActive>Item {{ $index }}</div>
+}
