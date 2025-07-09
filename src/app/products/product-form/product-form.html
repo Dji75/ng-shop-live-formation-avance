@@ -1,1 +1,16 @@
 <p>product-form works!</p>
+
+
+<form [formGroup]="dynamicForm">
+  @for (c of config; track c.name) {
+    <div class="field">
+      <label>{{ c.name }}: </label>
+      <input [formControlName]="c.name">
+
+<!--      @if (dynamicForm.get(c.name)?.touched && dynamicForm.get(c.name)?.errors) {-->
+      @if (hasFieldOnError(c.name)) {
+        <div class="error">{{ dynamicForm.get(c.name)?.errors | json }}</div>
+      }
+    </div>
+  }
+</form>

@@ -3,3 +3,8 @@
 @for (_ of products; track $index) {
   <div highlightOnOverWhenActive>Item {{ $index }}</div>
 }
+
+<app-product-card [index]="3">
+  <span>du contenu texte ou même un composant</span>
+  <span #content>un autre texte ou un autre composant</span>
+</app-product-card>
