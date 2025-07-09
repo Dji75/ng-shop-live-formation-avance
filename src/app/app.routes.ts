@@ -6,5 +6,9 @@ export const routes: Routes = [
     path: 'products',
     loadChildren: () => import('./products/products.routing'),
     canMatch: [authGuard],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./components/dashboard/dashboard.routing'),
   }
 ];

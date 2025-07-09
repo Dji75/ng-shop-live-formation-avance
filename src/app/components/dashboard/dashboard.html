@@ -1,0 +1,11 @@
+<p>dashboard works!</p>
+
+<ul>
+  <li><a [routerLink]="['..']">Back</a></li>
+  <li><a [routerLink]="['.']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+  <li><a [routerLink]="['users']" routerLinkActive="active">Users management</a></li>
+  <li><a [routerLink]="['products']" routerLinkActive="active">Products Management</a></li>
+  <li><a [routerLink]="['settings']" routerLinkActive="active">Settings</a></li>
+</ul>
+
+<router-outlet></router-outlet>

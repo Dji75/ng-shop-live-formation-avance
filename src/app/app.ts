@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { catchError, share, Subject, switchMap, throwError } from 'rxjs';
+import { isLogged } from './components/dashboard/shared/guards/users-guard/users-guard';
 
 @Component({
   selector: 'app-root',
@@ -65,5 +66,13 @@ export class App {
 
   onClick() {
     this.myValues$.next(5);
+  }
+
+  login() {
+    isLogged.next(true);
+  }
+
+  logout() {
+    isLogged.next(false);
   }
 }
