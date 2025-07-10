@@ -5,6 +5,10 @@ export default [
   {
     path: '',
     loadComponent: () => import('./dashboard'),
+    providers: [
+      // provideState(dashboardFeature),
+      // provideEffects(DashboardEffects),
+    ],
     children: [
       {
         path: '',

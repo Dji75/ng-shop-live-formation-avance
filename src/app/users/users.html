@@ -1,0 +1,14 @@
+<p>users works!</p>
+
+
+@let loadingState = loadingState$ | async;
+
+@if (loadingState === 'Success') {
+  @for (u of users$ | async; track $index) {
+    <div class="user">{{ u }}</div>
+  }
+} @else if (loadingState === 'Error') {
+  <div class="error"> Erreur est survenue</div>
+} @else {
+  <div class="loading">Chargement en coures</div>
+}
