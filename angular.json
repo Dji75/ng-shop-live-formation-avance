@@ -28,7 +28,11 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+            "polyfills": [
+              "@angular/localize/init"
+            ],
+            "localize": ["fr-FR"]
           },
           "configurations": {
             "production": {
@@ -50,9 +54,15 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "fr": {
+              "localize": ["fr-FR"]
+            },
+            "en": {
+              "localize": ["en-US"]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production",
         },
         "serve": {
           "builder": "@angular/build:dev-server",
@@ -62,6 +72,12 @@
             },
             "development": {
               "buildTarget": "ngshop20:build:development"
+            },
+            "fr": {
+              "buildTarget": "ngshop20:build:development,fr"
+            },
+            "en": {
+              "buildTarget": "ngshop20:build:development,en"
             }
           },
           "defaultConfiguration": "development"
@@ -82,8 +98,17 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
             ]
           }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "fr-FR",
+        "locales": {
+          "en-US" : "src/locales/messages.en-US.xlf"
         }
       }
     }
