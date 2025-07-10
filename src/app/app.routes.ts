@@ -22,5 +22,9 @@ export const routes: Routes = [
       provideState(usersFeature),
       provideEffects(UsersEffects),
     ]
-  }
+  },
+  {
+    path: 'signals',
+      loadComponent: () => import('./signals/signals').then(c => c.Signals),
+  },
 ];

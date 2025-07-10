@@ -4,11 +4,13 @@ import { provideStore } from '@ngrx/store';
 
 import { routes } from './app.routes';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
+    provideHttpClient(),
     provideRouter(routes,
       /*, withDebugTracing()*/
       withRouterConfig({

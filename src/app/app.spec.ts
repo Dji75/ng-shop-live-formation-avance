@@ -1,4 +1,4 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+import { linkedSignal, provideZonelessChangeDetection, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import {
@@ -109,7 +109,7 @@ describe('App', () => {
   });
 
 
-  fit('should combine obs', () => {
+  it('should combine obs', () => {
     const firsts$ = of(1, 2, 3);
     const seconds$ = of(11, 222, 333).pipe(delay(500));
 
@@ -126,5 +126,56 @@ describe('App', () => {
       console.log('first: ', first);
       console.log('second: ', second);
     })
+  });
+
+  fit('should test signals', () => {
+    // Création d'un signal
+    const compteur = signal(0);
+
+    // Méthode set: remplace la valeur actuelle
+    compteur.set(5);
+
+    // Méthode update: mise à jour basée sur la valeur actuelle
+    compteur.update(valeur => valeur + 1);
+
+
+
+    const optionsLivraison = signal(['Standard', 'Express', 'International']);
+    const optionSelectionnee = linkedSignal(() => optionsLivraison()[0]);
+
+    console.log(optionSelectionnee()); // 'Standard'
+
+    // On peut modifier la valeur du linkedSignal
+    optionSelectionnee.set(optionsLivraison()[1]);
+    console.log(optionSelectionnee()); // 'Express'
+
+    // Si la source change, linkedSignal est mis à jour automatiquement
+    optionsLivraison.set(['Email', 'Retrait en magasin', 'Livraison à domicile']);
+    console.log(optionSelectionnee()); // 'Email' (reset à la première option)
+
+
+
+    const optionSelectionneeWithComputation = linkedSignal<string[], string>({
+      source: optionsLivraison,
+      computation: (nouvelleListe, prev) => {
+        // Si pas de valeur précédente, retourne la première option
+        if (!prev) return nouvelleListe[0];
+
+        // Si l'option précédemment sélectionnée existe encore, la conserver
+        if (nouvelleListe.includes(prev.value)) return prev.value;
+
+        // Sinon, revenir à la première option
+        return nouvelleListe[0];
+      }
+    });
+  });
+
+  it('should not do anti pattern nested signals', () => {
+    const test = {
+      prop1: signal(5),
+      prop2: signal('test'),
+    }
+
+    console.log('valeur de signal', test.prop1());
   });
 });

@@ -1,0 +1,39 @@
+<p>signals works!</p>
+
+Compteur: {{ compteur() }}<br/>
+<button (click)="increment()">Increment</button><br/>
+<button (click)="decrement()">Decrement</button><br/>
+<br/><br/><br/>
+
+model: <input type="number" [(ngModel)]="model"><br/>
+Valeur du modèle: {{ model() }}<br/>
+
+Valeur 1: <input type="number" [ngModel]="valeur1()" (ngModelChange)="valeur1.set($event)"><br/>
+<br/>
+Valeur 2: <input type="number" [ngModel]="valeur2()" (ngModelChange)="valeur2.set($event)"><br/>
+<br/>
+Somme: {{ somme() }}<br/>
+<br/><br/><br/>
+
+<textarea [ngModel]="texte()" (ngModelChange)="texte.set($event)"></textarea><br/>
+<br/><br/><br/>
+
+
+
+Categories:
+<select (change)="selectCategory($event)">
+  @for (c of categories(); track $index) {
+    <option [value]="c">{{ c }}</option>
+  }
+</select><br/>
+<br/>
+Ressource HTTP:<br/>
+@if (productsHttpRessource.status() === 'loading') {
+  <div>Chargement en cours</div>
+} @else if (productsHttpRessource.status() === 'resolved') {
+  Résultats filtrés ({{ filteredProducts().length }}) :<br/>
+  @for (u of filteredProducts(); track u.id) {
+    <div>{{ u | json }}</div>
+  }
+}
+
