@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,8 +7,17 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './header.html',
-  styleUrl: './header.scss'
+  styleUrl: './header.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {
+export class Header implements OnInit {
+  private readonly cdRef = inject(ChangeDetectorRef);
+  protected value = 0;
 
+  ngOnInit() {
+    setInterval(() => {
+      this.value++;
+      this.cdRef.markForCheck();
+    }, 1000);
+  }
 }
